@@ -21,7 +21,7 @@ class UserControllerTest {
         ResponseEntity<UserResponse> result
                 = restTemplate.postForEntity("/users", request, UserResponse.class);
         // Assert
-        assertEquals(200, result.getStatusCode().value());
+        assertEquals(201, result.getStatusCode().value());
         assertEquals("Fname", request.getFirst_name());
         assertEquals("Lname", request.getLast_name());
     }

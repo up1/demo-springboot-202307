@@ -16,4 +16,12 @@ public class UserCommandService {
         throw new DuplicateFirstnameException("xxxx yyyy");
     }
 
+    void step1() {
+
+    }
+
+    void step2() {
+
+    }
+
 }

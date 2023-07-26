@@ -25,4 +25,17 @@ class UserControllerTest {
         assertEquals("Fname", request.getFirst_name());
         assertEquals("Lname", request.getLast_name());
     }
+
+    @Test
+    void createUser_with_duplicate_firstname() {
+        CreateUserRequest request = new CreateUserRequest();
+        request.setFirst_name("demo");
+        request.setLast_name("Lname");
+        ResponseEntity<MyError> result
+                = restTemplate.postForEntity("/users", request, MyError.class);
+        // Assert
+        assertEquals(400, result.getStatusCode().value());
+        assertEquals("24000", result.getBody().getCode());
+        assertEquals("Firstname duplicated", result.getBody().getDescription());
+    }
 }

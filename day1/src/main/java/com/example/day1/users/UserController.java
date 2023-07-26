@@ -22,14 +22,18 @@ public class UserController {
         return new UserResponse();
     }
 
+    @Autowired
+    private UserCommandService userCommandService;
+
     @PostMapping("/users")
     public ResponseEntity<UserResponse> createUser(@RequestBody CreateUserRequest user){
         // 1. Get data from request body
         // 2. Validate input
         // TODO :: 3. call service layer
-
+        Integer id = userCommandService.createUser(user);
         // 4. Return response to caller
         UserResponse userResponse = new UserResponse();
+        userResponse.setId(id);
         userResponse.setFirst_name(user.getFirst_name());
         userResponse.setLast_name(user.getLast_name());
 

@@ -16,6 +16,13 @@ public class Day1Application {
 			System.out.println(name);
 		}
 		System.out.println(context.getBeanDefinitionCount());
+
+		// Use HelloSpring
+		HelloSpring b1 = context.getBean(HelloSpring.class);
+		b1.count = 100;
+		System.out.println(b1.sayHi()); // 1 =
+		HelloSpring b2 = context.getBean(HelloSpring.class);
+		System.out.println(b2.sayHi()); // 2 =
 	}
 
 }

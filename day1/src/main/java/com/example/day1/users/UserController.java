@@ -1,7 +1,6 @@
 package com.example.day1.users;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,9 +27,7 @@ public class UserController {
         // TODO :: call service layer
 
         // Return with success code = 201
-        ResponseEntity<UserResponse> response =
-                new ResponseEntity<>(userResponse, HttpStatus.CREATED);
-        return response;
+        return new ResponseEntity<>(userResponse, HttpStatus.CREATED);
     }
 
 

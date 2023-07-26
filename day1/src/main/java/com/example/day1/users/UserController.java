@@ -19,16 +19,17 @@ public class UserController {
 
     @PostMapping("/users")
     public ResponseEntity<UserResponse> createUser(@RequestBody CreateUserRequest user){
-        // Get data from request body
+        // 1. Get data from request body
+        // 2. Validate input
+        // TODO :: 3. call service layer
+
+        // 4. Return response to caller
         UserResponse userResponse = new UserResponse();
         userResponse.setFirst_name(user.getFirst_name());
         userResponse.setLast_name(user.getLast_name());
 
-        // TODO :: call service layer
-        throw new DuplicateFirstnameException("");
-
         // Return with success code = 201
-//        return new ResponseEntity<>(userResponse, HttpStatus.CREATED);
+        return new ResponseEntity<>(userResponse, HttpStatus.CREATED);
     }
 
 

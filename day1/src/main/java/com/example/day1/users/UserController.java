@@ -25,9 +25,10 @@ public class UserController {
         userResponse.setLast_name(user.getLast_name());
 
         // TODO :: call service layer
+        throw new DuplicateFirstnameException("");
 
         // Return with success code = 201
-        return new ResponseEntity<>(userResponse, HttpStatus.CREATED);
+//        return new ResponseEntity<>(userResponse, HttpStatus.CREATED);
     }
 
 

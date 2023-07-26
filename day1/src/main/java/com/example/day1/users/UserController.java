@@ -1,9 +1,6 @@
 package com.example.day1.users;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserController {
@@ -15,6 +12,13 @@ public class UserController {
 
     @GetMapping("/users")
     public UserResponse getUserById2(@RequestParam String id) {
+        return new UserResponse();
+    }
+
+    @PostMapping("/users")
+    public UserResponse createUser(@RequestBody CreateUserRequest user){
+        System.out.println(user.getFirst_name());
+        System.out.println(user.getLast_name());
         return new UserResponse();
     }
 

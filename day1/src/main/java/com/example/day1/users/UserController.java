@@ -1,5 +1,8 @@
 package com.example.day1.users;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,10 +19,18 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public UserResponse createUser(@RequestBody CreateUserRequest user){
-        System.out.println(user.getFirst_name());
-        System.out.println(user.getLast_name());
-        return new UserResponse();
+    public ResponseEntity<UserResponse> createUser(@RequestBody CreateUserRequest user){
+        // Get data from request body
+        UserResponse userResponse = new UserResponse();
+        userResponse.setFirst_name(user.getFirst_name());
+        userResponse.setLast_name(user.getLast_name());
+
+        // TODO :: call service layer
+
+        // Return with success code = 201
+        ResponseEntity<UserResponse> response =
+                new ResponseEntity<>(userResponse, HttpStatus.CREATED);
+        return response;
     }
 
 

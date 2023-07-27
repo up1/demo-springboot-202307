@@ -13,6 +13,9 @@ class UserControllerTest {
     @Autowired
     TestRestTemplate restTemplate;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @Test
     void createUser_with_success() {
         CreateUserRequest request = new CreateUserRequest();
@@ -28,6 +31,10 @@ class UserControllerTest {
 
     @Test
     void createUser_with_duplicate_firstname() {
+        // Prepare user ::
+        MyTable m1 = new MyTable(1, "demo", "Lname");
+        userRepository.save(m1);
+        // Send request to api
         CreateUserRequest request = new CreateUserRequest();
         request.setFirst_name("demo");
         request.setLast_name("Lname");

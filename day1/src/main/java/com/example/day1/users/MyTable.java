@@ -16,6 +16,15 @@ public class MyTable {
     @Column(name = "lname")
     private String lastName;
 
+    public MyTable() {
+    }
+
+    public MyTable(Integer id, String firstName, String lastName) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public Integer getId() {
         return id;
     }

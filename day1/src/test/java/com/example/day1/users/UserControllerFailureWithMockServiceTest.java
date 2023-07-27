@@ -24,12 +24,14 @@ class UserControllerFailureWithMockServiceTest {
 
     @Test
     void createUser_with_duplicate_firstname() {
-        // TODO
-
-        // Send request to api
         CreateUserRequest request = new CreateUserRequest();
         request.setFirst_name("demo");
         request.setLast_name("Lname");
+        // TODO
+        when(service.createUser(request))
+                .thenThrow(DuplicateFirstnameException.class);
+        // Send request to api
+
         ResponseEntity<MyError> result
                 = restTemplate.postForEntity("/users", request, MyError.class);
         // Assert

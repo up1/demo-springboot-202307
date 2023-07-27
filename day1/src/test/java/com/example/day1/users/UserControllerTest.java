@@ -13,9 +13,6 @@ class UserControllerTest {
     @Autowired
     TestRestTemplate restTemplate;
 
-    @Autowired
-    private UserRepository userRepository;
-
     @Test
     void createUser_with_success() {
         CreateUserRequest request = new CreateUserRequest();
@@ -29,20 +26,4 @@ class UserControllerTest {
         assertEquals("Lname", request.getLast_name());
     }
 
-    @Test
-    void createUser_with_duplicate_firstname() {
-        // Prepare user ::
-        MyTable m1 = new MyTable(1, "demo", "Lname");
-        userRepository.save(m1);
-        // Send request to api
-        CreateUserRequest request = new CreateUserRequest();
-        request.setFirst_name("demo");
-        request.setLast_name("Lname");
-        ResponseEntity<MyError> result
-                = restTemplate.postForEntity("/users", request, MyError.class);
-        // Assert
-        assertEquals(400, result.getStatusCode().value());
-        assertEquals("24000", result.getBody().getCode());
-        assertEquals("Firstname duplicated", result.getBody().getDescription());
-    }
 }

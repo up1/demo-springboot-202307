@@ -28,6 +28,7 @@ public class UserCommandService {
         userRepository.deleteAll();
         // Send noti
         eventPublisher.fire("Process done");
+        eventPublisher.fire2(1);
     }
 
     public Integer createUser(CreateUserRequest newUser) {

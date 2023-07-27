@@ -14,4 +14,20 @@ public class NotificationService {
 
     }
 
+    @EventListener
+    public void xxx(String message){
+        // TODO
+        System.out.println("Call xxx :: " + message);
+        System.out.println("Done");
+
+    }
+
+    @EventListener
+    public void sendInt(Integer message){
+        // TODO
+        System.out.println("Call noti int service :: " + message);
+        System.out.println("Done");
+
+    }
+
 }

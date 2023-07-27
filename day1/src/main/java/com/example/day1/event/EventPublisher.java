@@ -17,4 +17,8 @@ public class EventPublisher implements ApplicationEventPublisherAware {
     public void fire(String message) {
         this.publisher.publishEvent(message);
     }
+
+    public void fire2(Integer message) {
+        this.publisher.publishEvent(message);
+    }
 }

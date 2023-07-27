@@ -5,7 +5,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class UserCommandServiceTest {
@@ -25,5 +29,19 @@ class UserCommandServiceTest {
 
     @Test
     void createUser_failure_duplicate_firstname() {
+        CreateUserRequest request = new CreateUserRequest();
+        request.setFirst_name("demo");
+        request.setLast_name("Lname");
+
+        List<MyTable> results = new ArrayList<>();
+        results.add(new MyTable());
+        when(userRepository.findByFirstName("demo")).thenReturn(results);
+
+        UserCommandService service = new UserCommandService(userRepository);
+        Exception exception = assertThrows(
+                DuplicateFirstnameException.class, () -> {
+                    service.createUser(request);
+                });
+        assertEquals("xxxx yyyy", exception.getMessage());
     }
 }

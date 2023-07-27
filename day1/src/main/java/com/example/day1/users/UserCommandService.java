@@ -8,12 +8,9 @@ import java.util.List;
 @Service
 public class UserCommandService {
 
-    @Autowired
     private UserRepository userRepository;
 
-    public UserCommandService() {
-    }
-
+    @Autowired
     public UserCommandService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }

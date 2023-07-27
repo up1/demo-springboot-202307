@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class UserCommandServiceTest {
@@ -43,5 +43,23 @@ class UserCommandServiceTest {
                     service.createUser(request);
                 });
         assertEquals("xxxx yyyy", exception.getMessage());
+    }
+
+    @Test
+    void createUser_failure_duplicate_firstname_with_spy(){
+        CreateUserRequest request = new CreateUserRequest();
+        request.setFirst_name("demo");
+        request.setLast_name("Lname");
+
+        List<MyTable> results = new ArrayList<>();
+        results.add(new MyTable());
+        when(userRepository.findByFirstName("demo")).thenReturn(results);
+
+        UserCommandService service = new UserCommandService(userRepository);
+        try {
+            service.createUser(request);
+        }catch (Exception e) {}
+        // Assert
+        verify(userRepository, times(1)).findByFirstName("demo");
     }
 }

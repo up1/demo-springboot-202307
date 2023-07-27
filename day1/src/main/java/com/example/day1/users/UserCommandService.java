@@ -1,5 +1,8 @@
 package com.example.day1.users;
 
+import com.example.day1.event.EventPublisher;
+import com.example.day1.noti.NotificationService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +18,16 @@ public class UserCommandService {
         this.userRepository = userRepository;
     }
 
+    @Autowired
+    EventPublisher eventPublisher;
+
+    @Transactional
     public void process() {
         MyTable myTable = new MyTable(1, "f1", "f2");
         userRepository.save(myTable);
         userRepository.deleteAll();
+        // Send noti
+        eventPublisher.fire("Process done");
     }
 
     public Integer createUser(CreateUserRequest newUser) {

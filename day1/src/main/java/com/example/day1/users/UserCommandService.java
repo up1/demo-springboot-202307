@@ -2,8 +2,6 @@ package com.example.day1.users;
 
 import org.springframework.stereotype.Service;
 
-import java.math.BigInteger;
-
 @Service
 public class UserCommandService {
 
@@ -14,14 +12,6 @@ public class UserCommandService {
         }
         // Case 2 :: Firstname duplicated
         throw new DuplicateFirstnameException("xxxx yyyy");
-    }
-
-    void step1() {
-
-    }
-
-    void step2() {
-
     }
 
 }

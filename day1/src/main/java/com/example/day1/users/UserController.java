@@ -11,9 +11,10 @@ public class UserController {
     @Autowired
     private UserService userServiceV1;
 
+
     @GetMapping("/users/{id}")
     public UserResponse getUserById(@PathVariable String id) {
-        userServiceV1.create();
+        userCommandService.process();
         return new UserResponse();
     }
 

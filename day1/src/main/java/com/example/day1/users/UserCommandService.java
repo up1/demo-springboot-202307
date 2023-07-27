@@ -15,6 +15,12 @@ public class UserCommandService {
         this.userRepository = userRepository;
     }
 
+    public void process() {
+        MyTable myTable = new MyTable(1, "f1", "f2");
+        userRepository.save(myTable);
+        userRepository.deleteAll();
+    }
+
     public Integer createUser(CreateUserRequest newUser) {
         // 1. Check firstname duplicate ?
         List<MyTable> results = userRepository.findByFirstName(newUser.getFirst_name());
@@ -27,5 +33,6 @@ public class UserCommandService {
         userRepository.save(myTable);
         return myTable.getId();
     }
+
 
 }

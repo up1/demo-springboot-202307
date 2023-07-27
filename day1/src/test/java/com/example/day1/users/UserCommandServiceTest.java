@@ -2,6 +2,7 @@ package com.example.day1.users;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -45,6 +46,9 @@ class UserCommandServiceTest {
         assertEquals("xxxx yyyy", exception.getMessage());
     }
 
+    @InjectMocks
+    UserCommandService service2;
+
     @Test
     void createUser_failure_duplicate_firstname_with_spy(){
         CreateUserRequest request = new CreateUserRequest();
@@ -55,9 +59,8 @@ class UserCommandServiceTest {
         results.add(new MyTable());
         when(userRepository.findByFirstName("demo")).thenReturn(results);
 
-        UserCommandService service = new UserCommandService(userRepository);
         try {
-            service.createUser(request);
+            service2.createUser(request);
         }catch (Exception e) {}
         // Assert
         verify(userRepository, times(1)).findByFirstName("demo");
